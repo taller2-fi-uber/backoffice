@@ -4,8 +4,11 @@ const Navbar = () => {
   return (
       <header>
           <div className="container">
-              <Link to='/'>
-                <h1>Home</h1>
+              <Link to='/login'>
+                <h1>login</h1>
+              </Link>
+              <Link to='/signup'>
+                  <h1>signup</h1>
               </Link>
           </div>
       </header>

@@ -34,7 +34,7 @@ const LogIn = () => {
     return (
         <header >
             <p align='middle'>
-                FIUBER
+                Login to FIUBER office
             </p>
 
             <Form id='login' variant="dark" onSubmit={onPress}>
