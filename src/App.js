@@ -1,7 +1,8 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LogIn from "./pages/LogIn";
 import Navbar from "./components/Navbar";
+import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogIn";
 import './App.css'
 
 function App() {
@@ -12,8 +13,16 @@ function App() {
         <div className='pages'>
           <Routes>
             <Route
-                path="/"
+                path="/login"
                 element={<LogIn />}
+            />
+            <Route
+                path="/signup"
+                element={<SignUp />}
+            />
+            <Route
+                path="/"
+                element={ <Navigate to="/login" /> }
             />
           </Routes>
         </div>
