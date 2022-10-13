@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../App.css'
 import {Link, useNavigate} from "react-router-dom";
-import {request, delay} from "../components/request";
+import {request, delay} from "../utils/request";
 
 const LogIn = () => {
 
