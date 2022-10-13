@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../App.css'
 import {Link, useNavigate} from "react-router-dom";
-import {request, delay} from "../utils/request";
+import {Requester, delay} from "../utils/request";
+import {startSession} from "../utils/session";
 
 const LogIn = () => {
 
@@ -12,15 +13,17 @@ const LogIn = () => {
 
     const onPress = async e => {
         e.preventDefault()
-        const req = {email: e.target.mail.value, password:  e.target.pass.value}
-        const body = await request(req, "POST");
+        const req = {email: e.target.mail.value, password: e.target.pass.value}
+        const body = await Requester.login(req);
 
         console.log(body)
         console.log("token: " + body.token)
         if (body.token) {
             setLogged("loged in :). Redirecting...");
             await delay(3000)
-            routeChange("/signup")
+            startSession(body.token)
+            routeChange("/home")
+            window.location.reload()
         } else {
             setLogged(body.msg);
         }
@@ -53,8 +56,6 @@ const LogIn = () => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button> <br/>
-
-                <Link  to={'/signup'}>¿Todavía no tenes cuenta? Create una</Link>
 
                 <h1>{logged}</h1>
 

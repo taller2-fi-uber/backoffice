@@ -3,71 +3,80 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../App.css'
 import {Link} from "react-router-dom";
+import {Requester} from "../utils/request";
 
 const SignUp = () => {
 
     const [logged, setLogged] = useState(null)
     const onPress = async e => {
         e.preventDefault()
-        const mail = e.target.mail.value;
-        const pass = e.target.pass.value;
-        console.log(mail)
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({username: mail, password: pass})
-        };
-        const res = await fetch("https://fiuber-api-gateway.herokuapp.com" + '/login/signup', requestOptions);
-        const response = await res.json();
-        console.log(response)
-        if (res.login) {
-            setLogged("loged in");
+        // const email = e.target.mail.value;
+        // const name = e.target.pass.value;
+        // const lastname = e.target.lastname.value;
+        // const date = e.target.date.value;
+        // const pass = e.target.pass.value;
+        console.log(e.target.date.value)
+        const req = {
+            email: e.target.mail.value,
+            password: e.target.pass.value,
+            birthDate: e.target.date.value,
+            name: e.target.name.value,
+            lastName: e.target.lastname.value
+        }
+        console.log("Request:" + req)
+        const body = await Requester.signup(req);
+        console.log(body)
+        if (body.token) {
+            setLogged("New admin registered");
         } else {
-            setLogged("unable to login");
+            if( body.err && !(body.code === "SERVER_ERROR")) {
+                setLogged(body.msg);
+            } else {
+                setLogged("failed to register new admin");
+            }
         }
     }
 
     return (
         <header >
-            {/*<img src={logo} className="App-logo" alt="logo"/ >*/}
             <p align='middle'>
-                FIUBER
+                Sign up new fiuber admin
             </p>
-            {/*<form>
-                <label>
-                    user:
-                    <input type="user" name="name"/>
-                </label> <br/>
-                <label>
-                    password:
-                    <input type="password" name="name"/>
-                </label> <br/>
-                <input onClick={() => onPress()} type="button" value="Log in"/>
-                <h1>{logged}</h1>
-            </form>*/}
 
             <Form id='login' variant="dark" onSubmit={onPress}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" name="mail" placeholder="Enter email" />
                     <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
+                        Use the new admin email, not yours.
                     </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" name="name" placeholder="New admin name" />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Lastname</Form.Label>
+                    <Form.Control type="text" name="lastname" placeholder="New admin lastname" />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>New admin birthday</Form.Label>
+                    <Form.Control type="date" name="date" placeholder="" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="pass" placeholder="Password" />
                 </Form.Group>
-                {/*<Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>*/}
+
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-                <h1>{logged}</h1>
+                <h4>{logged}</h4>
 
-                <Link  to={'/login'}>¿Ya tenes una cuenta? Accedé acá</Link>
             </Form>
         </header>
     )
