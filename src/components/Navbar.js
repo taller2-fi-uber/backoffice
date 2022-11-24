@@ -16,6 +16,9 @@ const Navbar = () => {
                   <Link to='/signup'>
                       <h1>new admin</h1>
                   </Link>
+                  <Link to='/users'>
+                      <h1>Users</h1>
+                  </Link>
                   <Link to='/home'>
                       <h1>home</h1>
                   </Link>

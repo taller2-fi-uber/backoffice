@@ -8,8 +8,8 @@ export class Requester {
             headers: {
                 'Content-Type': 'application/json',
                 'x-auth-token': getToken()},
-            body: JSON.stringify(request)
         };
+        if ( request ) requestOptions.body = JSON.stringify(request);
         const res = await fetch(process.env.REACT_APP_BACKEND_URL + path, requestOptions);
         return await res.json();
     }
@@ -20,6 +20,10 @@ export class Requester {
 
     static signup(body) {
         return this._request(body, "POST", '/login/admin')
+    }
+
+    static getUsers() {
+        return this._request(null , "GET", '/users/users').then(d => d)
     }
 
 }
