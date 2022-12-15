@@ -8,6 +8,7 @@ import {isSessionUp} from "./utils/session";
 import Home from "./pages/Home";
 import LogOut from "./pages/LogOut";
 import Users from './pages/Users';
+import Rules from './pages/Rules';
 
 const PrivateRoute = () => {
     const auth = isSessionUp(); // determine if authorized, from context or however you're doing it
@@ -39,6 +40,9 @@ const App = () => {
                         </Route>
                         <Route exact path='/' element={<PrivateRoute/>}>
                             <Route exact path='/logout' element={<LogOut/>}/>
+                        </Route>
+                        <Route exact path='/' element={<PrivateRoute/>}>
+                            <Route exact path='/rules' element={<Rules/>}/>
                         </Route>
                         <Route
                             path="/"

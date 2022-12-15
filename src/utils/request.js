@@ -1,4 +1,4 @@
-import {getToken} from "../utils/session";
+import {getToken} from './session';
 
 export class Requester {
 
@@ -24,6 +24,14 @@ export class Requester {
 
     static getUsers() {
         return this._request(null , "GET", '/users/users').then(d => d)
+    }
+
+    static updateRules(body) {
+        return this._request(body , "POST", '/trip/rules').then(d => d)
+    }
+
+    static getRules() {
+        return this._request(null , "POST", '/trip/rules').then(d => d)
     }
 
 }

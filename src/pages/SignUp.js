@@ -10,11 +10,6 @@ const SignUp = () => {
     const [logged, setLogged] = useState(null)
     const onPress = async e => {
         e.preventDefault()
-        // const email = e.target.mail.value;
-        // const name = e.target.pass.value;
-        // const lastname = e.target.lastname.value;
-        // const date = e.target.date.value;
-        // const pass = e.target.pass.value;
         console.log(e.target.date.value)
         const req = {
             email: e.target.mail.value,
