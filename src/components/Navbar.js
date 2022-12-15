@@ -17,7 +17,7 @@ const Navbar = () => {
                       <h1>new admin</h1>
                   </Link>
                   <Link to='/users'>
-                      <h1>Users</h1>
+                      <h1>users</h1>
                   </Link>
                   <Link to='/rules'>
                     <h1>rules</h1>

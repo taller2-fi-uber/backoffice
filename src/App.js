@@ -1,4 +1,12 @@
-import {BrowserRouter, Navigate, Redirect, Route, Routes, Outlet} from 'react-router-dom'
+import {
+    BrowserRouter,
+    Navigate,
+    Redirect,
+    Route,
+    Routes,
+    Outlet,
+    HashRouter
+} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "./components/Navbar";
 import SignUp from "./pages/SignUp";
@@ -21,7 +29,7 @@ const PrivateRoute = () => {
 const App = () => {
     return (
         <div className="App">
-            <BrowserRouter>
+            <HashRouter>
                 <Navbar/>
                 <div className='pages'>
                     <Routes>
@@ -50,7 +58,7 @@ const App = () => {
                         />
                     </Routes>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
